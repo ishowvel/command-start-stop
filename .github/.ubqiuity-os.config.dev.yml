@@ -1,6 +1,6 @@
 plugins:
   - uses:
-    - plugin: http://localhost:4000 # or the URL where the plugin is hosted
+    - plugin: http://localhost:4001 # or the URL where the plugin is hosted
       name: start-stop
       id: start-stop-command
       description: "Allows a user to start/stop a task without negative XP impact"

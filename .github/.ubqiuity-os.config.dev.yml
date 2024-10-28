@@ -1,0 +1,17 @@
+plugins:
+  - uses:
+    - plugin: http://localhost:4000 # or the URL where the plugin is hosted
+      name: start-stop
+      id: start-stop-command
+      description: "Allows a user to start/stop a task without negative XP impact"
+      command: "\/start|\/stop"
+      example: "/start" # or "/stop"
+      with:
+        reviewDelayTolerance: "3 Days"
+        taskStaleTimeoutDuration: "30 Days"
+        maxConcurrentTasks: # Default concurrent task limits per role.
+          member: 5
+          contributor: 3
+        startRequiresWallet: true # default is true
+        emptyWalletText: "Please set your wallet address with the /wallet command first and try again."
+        rolesWithReviewAuthority: ["MEMBER", "OWNER"]

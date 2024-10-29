@@ -1,52 +1,53 @@
 plugins:
   - uses:
-    - plugin: http://127.0.0.1:4000
-      with:
-        labels:
-          time:
-            - "Time: <15 Minutes"
-            - "Time: <1 Hour"
-            - "Time: <2 Hours"
-            - "Time: <4 Hours"
-            - "Time: <1 Day"
-            - "Time: <1 Week"
-            - "Time: <2 Weeks"
-            - "Time: <1 Month"
-          priority:
-            - "Priority: 1 (Normal)"
-            - "Priority: 2 (Medium)"
-            - "Priority: 3 (High)"
-            - "Priority: 4 (Urgent)"
-            - "Priority: 5 (Emergency)"
-        basePriceMultiplier: 2
-        publicAccessControl:
-          setLabel: true
-          fundExternalClosedIssue: false
-  -  uses:
-    - plugin: ishowvel/daemon-disqualifier:compute.yml@testing
-      with:
-        disqualification: "2 minutes"
-        warning: "1 minutes"
-        watch:
-          optOut:
-            - "repoName"
-            - "repoName2"
-        eventWhitelist:
-          - "review_requested"
-          - "ready_for_review"
-          - "commented"
-          - "committed"
+      - plugin: http://127.0.0.1:4000
+        with:
+          labels:
+            time:
+              - "Time: <15 Minutes"
+              - "Time: <1 Hour"
+              - "Time: <2 Hours"
+              - "Time: <4 Hours"
+              - "Time: <1 Day"
+              - "Time: <1 Week"
+              - "Time: <2 Weeks"
+              - "Time: <1 Month"
+            priority:
+              - "Priority: 1 (Normal)"
+              - "Priority: 2 (Medium)"
+              - "Priority: 3 (High)"
+              - "Priority: 4 (Urgent)"
+              - "Priority: 5 (Emergency)"
+          basePriceMultiplier: 2
+          publicAccessControl:
+            setLabel: true
+            fundExternalClosedIssue: false
+
   - uses:
-    - plugin: http://localhost:4001 # or the URL where the plugin is hosted
-      name: start-stop
-      id: start-stop-command
-      with:
-        reviewDelayTolerance: "3 Days"
-        taskStaleTimeoutDuration: "30 Days"
-        maxConcurrentTasks: # Default concurrent task limits per role.
-          member: 5
-          contributor: 3
-        startRequiresWallet: true # default is true
-        emptyWalletText: "Please set your wallet address with the /wallet command first and try again."
-        rolesWithReviewAuthority: ["MEMBER", "OWNER"]
-    
+      - plugin: ishowvel/daemon-disqualifier:compute.yml@testing
+        with:
+          disqualification: "2 minutes"
+          warning: "1 minutes"
+          watch:
+            optOut:
+              - "repoName"
+              - "repoName2"
+          eventWhitelist:
+            - "review_requested"
+            - "ready_for_review"
+            - "commented"
+            - "committed"
+
+  - uses:
+      - plugin: http://localhost:4001 # or the URL where the plugin is hosted
+        name: start-stop
+        id: start-stop-command
+        with:
+          reviewDelayTolerance: "3 Days"
+          taskStaleTimeoutDuration: "30 Days"
+          maxConcurrentTasks: # Default concurrent task limits per role.
+            member: 5
+            contributor: 3
+          startRequiresWallet: true # default is true
+          emptyWalletText: "Please set your wallet address with the /wallet command first and try again."
+          rolesWithReviewAuthority: ["MEMBER", "OWNER"]

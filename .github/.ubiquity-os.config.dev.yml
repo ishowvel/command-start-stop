@@ -51,3 +51,9 @@ plugins:
           startRequiresWallet: true # default is true
           emptyWalletText: "Please set your wallet address with the /wallet command first and try again."
           rolesWithReviewAuthority: ["MEMBER", "OWNER"]
+
+  - uses:
+      - plugin: http://localhost:4002
+        id: command-wallet
+        with:
+          registerWalletWithVerification: false

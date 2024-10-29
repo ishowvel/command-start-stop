@@ -22,7 +22,7 @@ plugins:
         publicAccessControl:
           setLabel: true
           fundExternalClosedIssue: false
-
+  -  uses:
     - plugin: ishowvel/daemon-disqualifier:compute.yml@testing
       with:
         disqualification: "2 minutes"
@@ -36,13 +36,10 @@ plugins:
           - "ready_for_review"
           - "commented"
           - "committed"
-
+  - uses:
     - plugin: http://localhost:4001 # or the URL where the plugin is hosted
       name: start-stop
       id: start-stop-command
-      description: "Allows a user to start/stop a task without negative XP impact"
-      command: "\/start|\/stop"
-      example: "/start" # or "/stop"
       with:
         reviewDelayTolerance: "3 Days"
         taskStaleTimeoutDuration: "30 Days"
